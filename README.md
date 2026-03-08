@@ -178,7 +178,7 @@ Top Risk Files
 
 
 
-![Main](screenshots/Main.png)
+![Main](screenshots/main.png)
 ![Front 1](screenshots/2.png)
 ![Front 2](screenshots/3.png)
 ![Front 3](screenshots/4.png)
