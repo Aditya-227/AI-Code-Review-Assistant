@@ -18,7 +18,11 @@ This project automatically analyzes a repository and highlights:
 
 The results are presented through an **interactive Streamlit dashboard**.
 
+# AI Code Review & Bug Prediction Assistant
 
+[![Streamlit App](https://img.shields.io/badge/Streamlit-Live%20App-ff4b4b?logo=streamlit)](https://ai-code-review-assistantt.streamlit.app/)
+
+An AI-powered tool that analyzes Git repositories to detect bug risks, code complexity issues, and repository health insights.
 
 # Features
 
