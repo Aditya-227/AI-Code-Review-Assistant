@@ -59,24 +59,31 @@ st.markdown(
 unsafe_allow_html=True
 )
 
+st.info("Try the demo if you don't have a repository.")
+
 col1, col2, col3 = st.columns([1,2,1])
 
 with col2:
 
-
+    
     repo_url = st.text_input("Enter GitHub Repository URL")
-
-colA, colB = st.columns(2)
-
-with colA:
-    analyze = st.button("Analyze Repository")
-
-with colB:
-    demo = st.button("Run Demo")
+    
+    colA, colB = st.columns(2)
+    
+    with colA:
+        analyze = st.button("Analyze Repository")
+    
+    with colB:
+        demo = st.button("Run Demo")
     
     st.markdown('</div>', unsafe_allow_html=True)
     
-    if analyze and repo_url:
+    
+    if demo:
+        repo_url = "https://github.com/pallets/flask"
+    
+    
+    if (analyze and repo_url) or demo:
     
         progress = st.progress(0)
     
@@ -236,5 +243,3 @@ with colB:
     This AI system analyzed repository structure, commit history, code complexity and predicted potential bug risk using automated analysis techniques.
     
     """)
-    
-
