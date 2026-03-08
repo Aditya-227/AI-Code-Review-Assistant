@@ -59,7 +59,7 @@ unsafe_allow_html=True
 col1, col2, col3 = st.columns([1,2,1])
 
 with col2:
-    repo_path = st.text_input("Enter Local Repository Path")
+    repo_url = st.text_input("Enter GitHub Repository URL")
     analyze = st.button("Analyze Repository")
 
     st.markdown('</div>', unsafe_allow_html=True)
@@ -219,3 +219,4 @@ with col2:
 
         This AI system analyzed repository structure, commit history, code complexity and predicted potential bug risk using automated analysis techniques.
         """)
+
