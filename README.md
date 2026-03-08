@@ -177,7 +177,6 @@ Start the Streamlit dashboard
 streamlit run app.py
 ```
 
----
 
 # Screenshots
 
@@ -193,7 +192,7 @@ streamlit run app.py
 
 ![Front5](screenshots/6.png)
 
----
+
 
 # Future Improvements
 
