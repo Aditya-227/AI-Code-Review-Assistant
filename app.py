@@ -1,3 +1,5 @@
+import git
+import os
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -64,7 +66,7 @@ with col2:
 
     st.markdown('</div>', unsafe_allow_html=True)
 
-    if analyze:
+    if analyze and repo_url:
 
 
         progress = st.progress(0)
@@ -72,7 +74,15 @@ with col2:
         time.sleep(0.2)
         progress.progress(10)
 
-        repo = load_repository(repo_path)
+        repo_path = "temp_repo"
+
+if os.path.exists(repo_path):
+    import shutil
+    shutil.rmtree(repo_path)
+
+git.Repo.clone_from(repo_url, repo_path)
+
+repo = load_repository(repo_path)
 
         progress.progress(20)
 
@@ -219,4 +229,5 @@ with col2:
 
         This AI system analyzed repository structure, commit history, code complexity and predicted potential bug risk using automated analysis techniques.
         """)
+
 
