@@ -1,5 +1,6 @@
 import git
 import os
+import shutil
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -61,174 +62,170 @@ unsafe_allow_html=True
 col1, col2, col3 = st.columns([1,2,1])
 
 with col2:
-    repo_url = st.text_input("Enter GitHub Repository URL")
-    analyze = st.button("Analyze Repository")
 
-    st.markdown('</div>', unsafe_allow_html=True)
+```
+repo_url = st.text_input("Enter GitHub Repository URL")
+analyze = st.button("Analyze Repository")
 
-    if analyze and repo_url:
+st.markdown('</div>', unsafe_allow_html=True)
 
+if analyze and repo_url:
 
-        progress = st.progress(0)
+    progress = st.progress(0)
 
-        time.sleep(0.2)
-        progress.progress(10)
+    time.sleep(0.2)
+    progress.progress(10)
 
-        repo_path = "temp_repo"
+    repo_path = "temp_repo"
 
     if os.path.exists(repo_path):
-        import shutil
         shutil.rmtree(repo_path)
 
-        git.Repo.clone_from(repo_url, repo_path)
+    git.Repo.clone_from(repo_url, repo_path)
 
-        repo = load_repository(repo_path)
+    repo = load_repository(repo_path)
 
-        progress.progress(20)
+    progress.progress(20)
 
-        freq = get_file_change_frequency(repo)
+    freq = get_file_change_frequency(repo)
 
-        progress.progress(30)
+    progress.progress(30)
 
-        features = extract_repo_features(repo_path, freq)
+    features = extract_repo_features(repo_path, freq)
 
-        progress.progress(45)
+    progress.progress(45)
 
-        predictor = BugPredictor()
+    predictor = BugPredictor()
 
-        predictions = predictor.predict(features)
+    predictions = predictor.predict(features)
 
-        progress.progress(60)
+    progress.progress(60)
 
-        issues = analyze_repository(repo_path)
+    issues = analyze_repository(repo_path)
 
-        progress.progress(75)
+    progress.progress(75)
 
-        score = calculate_health_score(features, predictions, issues)
+    score = calculate_health_score(features, predictions, issues)
 
-        progress.progress(100)
+    progress.progress(100)
 
-        st.success("Analysis Complete")
+    st.success("Analysis Complete")
 
+    predictions["file"] = predictions["file"].apply(lambda x: x.split("/")[-1])
+    df = predictions.copy()
 
+    st.header("Repository Health Overview")
 
-        predictions["file"] = predictions["file"].apply(lambda x: x.split("\\")[-1])
-        df = predictions.copy()
+    col1, col2, col3 = st.columns(3)
 
-        st.header("Repository Health Overview")
-
-        col1, col2, col3 = st.columns(3)
-
-        col1.metric("Health Score", f"{score}%")
-        col2.metric("Files Analyzed", len(df))
-        col3.metric("Code Issues", len(issues))
+    col1.metric("Health Score", f"{score}%")
+    col2.metric("Files Analyzed", len(df))
+    col3.metric("Code Issues", len(issues))
 
 
-        gauge = go.Figure(go.Indicator(
-            mode="gauge+number",
-            value=score,
-            title={"text": "Repository Health Score"},
-            gauge={
-                "axis": {"range": [0, 100]},
-                "bar": {"color": "green"},
-                "steps": [
-                    {"range": [0, 40], "color": "red"},
-                    {"range": [40, 70], "color": "orange"},
-                    {"range": [70, 100], "color": "green"}
-                ],
-            },
-        ))
+    gauge = go.Figure(go.Indicator(
+        mode="gauge+number",
+        value=score,
+        title={"text": "Repository Health Score"},
+        gauge={
+            "axis": {"range": [0, 100]},
+            "bar": {"color": "green"},
+            "steps": [
+                {"range": [0, 40], "color": "red"},
+                {"range": [40, 70], "color": "orange"},
+                {"range": [70, 100], "color": "green"}
+            ],
+        },
+    ))
 
-        st.plotly_chart(gauge, use_container_width=True)
-
-
-        st.divider()
-
-        st.subheader("Bug Risk Per File")
-
-        df_sorted = df.sort_values("bug_probability", ascending=False)
-
-        st.dataframe(df_sorted[["file","bug_probability"]], use_container_width=True)
+    st.plotly_chart(gauge, use_container_width=True)
 
 
-        st.subheader("Top Risk Files")
+    st.divider()
 
-        top_risk = df_sorted.head(5)
+    st.subheader("Bug Risk Per File")
 
-        fig_top = px.bar(
-            top_risk,
-            x="file",
-            y="bug_probability",
-            color="bug_probability",
-            title="Top High-Risk Files"
-        )
+    df_sorted = df.sort_values("bug_probability", ascending=False)
 
-        st.plotly_chart(fig_top, use_container_width=True)
+    st.dataframe(df_sorted[["file","bug_probability"]], use_container_width=True)
 
 
-        st.subheader("Bug Probability Distribution")
+    st.subheader("Top Risk Files")
 
-        fig_hist = px.histogram(
-            df,
-            x="bug_probability",
-            nbins=10,
-            title="Bug Probability Distribution"
-        )
+    top_risk = df_sorted.head(5)
 
-        st.plotly_chart(fig_hist, use_container_width=True)
+    fig_top = px.bar(
+        top_risk,
+        x="file",
+        y="bug_probability",
+        color="bug_probability",
+        title="Top High-Risk Files"
+    )
 
-
-        st.subheader("Code Complexity Overview")
-
-        feature_df = pd.DataFrame(features)
-        feature_df["file"] = feature_df["file"].apply(lambda x: x.split("\\")[-1])
-
-        fig_complex = px.scatter(
-            feature_df,
-            x="lines_of_code",
-            y="cyclomatic_complexity",
-            size="function_count",
-            hover_name="file",
-            title="Complexity vs File Size"
-        )
-
-        st.plotly_chart(fig_complex, use_container_width=True)
+    st.plotly_chart(fig_top, use_container_width=True)
 
 
-        st.subheader("Code Review Issues")
+    st.subheader("Bug Probability Distribution")
 
-        if issues:
-            st.dataframe(pd.DataFrame(issues), use_container_width=True)
-        else:
-            st.success("No major code review issues detected")
+    fig_hist = px.histogram(
+        df,
+        x="bug_probability",
+        nbins=10,
+        title="Bug Probability Distribution"
+    )
 
-
-        st.divider()
-
-        st.header("AI Repository Summary")
-
-        avg_bug = df["bug_probability"].mean()
-
-        if score > 80:
-            status = "Excellent"
-        elif score > 60:
-            status = "Moderate"
-        else:
-            status = "Needs Attention"
-
-        st.info(f"""
-        ```
-
-        Repository Health Status: {status}
-
-        Average Bug Probability: {round(avg_bug,2)}
-
-        Total Files Analyzed: {len(df)}
-
-        Detected Code Issues: {len(issues)}
-
-        This AI system analyzed repository structure, commit history, code complexity and predicted potential bug risk using automated analysis techniques.
-        """)
+    st.plotly_chart(fig_hist, use_container_width=True)
 
 
+    st.subheader("Code Complexity Overview")
 
+    feature_df = pd.DataFrame(features)
+    feature_df["file"] = feature_df["file"].apply(lambda x: x.split("/")[-1])
+
+    fig_complex = px.scatter(
+        feature_df,
+        x="lines_of_code",
+        y="cyclomatic_complexity",
+        size="function_count",
+        hover_name="file",
+        title="Complexity vs File Size"
+    )
+
+    st.plotly_chart(fig_complex, use_container_width=True)
+
+
+    st.subheader("Code Review Issues")
+
+    if issues:
+        st.dataframe(pd.DataFrame(issues), use_container_width=True)
+    else:
+        st.success("No major code review issues detected")
+
+
+    st.divider()
+
+    st.header("AI Repository Summary")
+
+    avg_bug = df["bug_probability"].mean()
+
+    if score > 80:
+        status = "Excellent"
+    elif score > 60:
+        status = "Moderate"
+    else:
+        status = "Needs Attention"
+
+    st.info(f"""
+```
+
+Repository Health Status: {status}
+
+Average Bug Probability: {round(avg_bug,2)}
+
+Total Files Analyzed: {len(df)}
+
+Detected Code Issues: {len(issues)}
+
+This AI system analyzed repository structure, commit history, code complexity and predicted potential bug risk using automated analysis techniques.
+
+""")
