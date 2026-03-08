@@ -65,7 +65,14 @@ with col2:
 
 
     repo_url = st.text_input("Enter GitHub Repository URL")
+
+colA, colB = st.columns(2)
+
+with colA:
     analyze = st.button("Analyze Repository")
+
+with colB:
+    demo = st.button("Run Demo")
     
     st.markdown('</div>', unsafe_allow_html=True)
     
@@ -230,3 +237,4 @@ with col2:
     
     """)
     
+
