@@ -1,104 +1,133 @@
 # AI Code Review & Bug Prediction Assistant
 
-An AI-powered software analysis tool that evaluates Git repositories to identify potential bug risks, code complexity issues, and overall repository health.
+<p align="center">
 
-The system combines **static code analysis, repository mining, and machine learning-based risk estimation** to provide developers with actionable insights about their codebase.
+<img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&size=28&duration=3000&pause=1000&color=FF4B4B&center=true&vCenter=true&width=800&lines=AI+Code+Review+%26+Bug+Prediction+Assistant;Analyze+Repositories+Automatically;Detect+Bug+Risk+%26+Code+Complexity;Interactive+ML+Powered+Dashboard" />
 
+</p>
 
+<p align="center">
+
+<a href="https://ai-code-review-assistantt.streamlit.app/">
+<img src="https://img.shields.io/badge/Streamlit-Live%20Demo-ff4b4b?logo=streamlit&logoColor=white">
+</a>
+
+<img src="https://img.shields.io/badge/Python-3.10+-blue?logo=python">
+<img src="https://img.shields.io/badge/Machine%20Learning-Scikit--Learn-orange">
+<img src="https://img.shields.io/github/stars/Aditya-227/AI-Code-Review-Assistant?style=social">
+<img src="https://img.shields.io/github/forks/Aditya-227/AI-Code-Review-Assistant?style=social">
+<img src="https://img.shields.io/github/license/Aditya-227/AI-Code-Review-Assistant">
+<img src="https://img.shields.io/badge/Made%20With-Streamlit-red">
+
+</p>
+
+---
+
+# Live Demo
+
+🚀 **Try the application**
+
+https://ai-code-review-assistantt.streamlit.app/
+
+Analyze **any GitHub repository** or run the **built-in demo repository**.
+
+---
 
 # Overview
 
-Software defects often arise from complex code, large files, and frequently modified components.
-This project automatically analyzes a repository and highlights:
+Software defects often arise from:
 
-• Files with high bug risk
-• Code complexity issues
-• Repository health score
-• Code quality insights
+- High code complexity  
+- Large files and functions  
+- Frequently modified components  
 
-The results are presented through an **interactive Streamlit dashboard**.
+This project automatically analyzes repositories and highlights:
 
-# AI Code Review & Bug Prediction Assistant
+- High-risk files  
+- Code complexity problems  
+- Repository health score  
+- Maintainability insights  
 
-[![Streamlit App](https://img.shields.io/badge/Streamlit-Live%20App-ff4b4b?logo=streamlit)](https://ai-code-review-assistantt.streamlit.app/)
+All results are presented through an **interactive Streamlit dashboard**.
 
-An AI-powered tool that analyzes Git repositories to detect bug risks, code complexity issues, and repository health insights.
+---
 
 # Features
 
-### Repository Analysis
+## Repository Analysis
 
-* Reads a local Git repository
-* Extracts commit history
-* Calculates file change frequency
+- Loads Git repositories  
+- Extracts commit history  
+- Computes file change frequency  
 
-### Code Parsing
+## Code Parsing
 
-* Parses Python files
-* Extracts functions and classes
+- Parses Python source files  
+- Extracts functions and classes using **Python AST**
 
-### Feature Extraction
+## Feature Extraction
 
-Computes metrics such as:
+Computes important metrics:
 
-* Lines of Code
-* Cyclomatic Complexity
-* Function Count
-* Change Frequency
+- Lines of Code (LOC)  
+- Cyclomatic Complexity  
+- Function Count  
+- Change Frequency  
 
-### Bug Risk Estimation
+## Bug Risk Prediction
 
-Predicts bug probability for each file based on code complexity and repository activity.
+Uses **machine learning** to estimate:
 
-### Code Review Engine
+- Bug probability per file  
+- Risk-prone modules  
 
-Detects common issues such as:
+## Automated Code Review
 
-* High complexity functions
-* Long methods
-* Potential maintainability problems
+Detects maintainability issues such as:
 
-### Repository Health Score
+- Highly complex functions  
+- Long methods  
+- Code quality problems  
 
-Calculates an overall health score based on:
+## Repository Health Score
 
-* Complexity
-* Bug risk
-* Code issues
+Calculates overall repository health based on:
 
-### Interactive Dashboard
+- Code complexity  
+- Bug risk  
+- Code issues  
 
-Provides visual insights including:
+## Interactive Dashboard
 
-* Health score gauge
-* Bug probability charts
-* Complexity visualizations
-* High-risk file detection
-* AI repository summary
+The Streamlit interface provides:
 
+- Repository health score gauge  
+- Bug probability charts  
+- Complexity scatter plots  
+- High-risk file detection  
+- AI generated repository summary  
 
+---
 
 # Tech Stack
 
-**Language**
+### Language
+Python
 
-* Python
+### Libraries
+- Streamlit  
+- Plotly  
+- GitPython  
+- Radon  
+- Pandas  
+- NumPy  
+- Scikit-learn  
 
-**Libraries**
-
-* Streamlit
-* Plotly
-* GitPython
-* Radon
-* Pandas
-* NumPy
-* Scikit-learn
-
-
+---
 
 # Project Structure
 
-
+```
 AI-Code-Review-Assistant
 │
 ├── app.py
@@ -114,142 +143,66 @@ AI-Code-Review-Assistant
 │
 ├── screenshots/
 └── README.md
-
-
-
-# Architecture
-
-The system processes repositories through multiple stages:
-
-1. Repository Loader – Extract Git history
-2. Code Parser – Analyze Python files
-3. Feature Extractor – Generate complexity metrics
-4. Bug Predictor – Estimate defect probability
-5. Code Review Engine – Detect maintainability issues
-6. Health Score Calculator – Compute repository health
-7. Streamlit Dashboard – Display insights visually
+```
 
 ---
 
 # Installation
 
-Clone the repository:
+Clone repository
 
-
+```bash
 git clone https://github.com/Aditya-227/AI-Code-Review-Assistant.git
+```
 
+Navigate to project
 
-Navigate into the project:
-
+```bash
 cd AI-Code-Review-Assistant
+```
 
+Install dependencies
 
-Install dependencies:
-
-
+```bash
 pip install -r requirements.txt
+```
 
-
-
+---
 
 # Run the Application
 
-Start the Streamlit dashboard:
+Start the Streamlit dashboard
 
-
+```bash
 streamlit run app.py
+```
 
-
-Then open the browser and enter the path of a local Git repository to analyze.
-
-
-# Example Output
-
-Repository Health Score: **83%**
-
-Top Risk Files
-
-| File                 | Bug Probability |
-| -------------------- | --------------- |
-| parser.py            | 0.54            |
-| feature_extractor.py | 0.52            |
-| repo_loader.py       | 0.49            |
-
-
+---
 
 # Screenshots
 
-
-
-
 ![Main](screenshots/Main.png)
-![Front 1](screenshots/2.png)
-![Front 2](screenshots/3.png)
-![Front 3](screenshots/4.png)
-![Front 4](screenshots/5.png)
-![Front end](screenshots/6.png)
 
+![Front1](screenshots/2.png)
 
+![Front2](screenshots/3.png)
 
+![Front3](screenshots/4.png)
+
+![Front4](screenshots/5.png)
+
+![Front5](screenshots/6.png)
+
+---
 
 # Future Improvements
 
-* LLM-based code review suggestions
-* Function-level bug prediction
-* Commit activity visualization
-* Duplicate code detection across repositories
+- LLM-based automated code review  
+- Function-level bug prediction  
+- Commit activity visualization  
+- Cross-repository duplicate code detection  
 
-
-
-
-
-Project Architecture Diagram
-
-                +----------------------+
-                |   Git Repository     |
-                +----------+-----------+
-                           |
-                           v
-                +----------------------+
-                |  Repository Loader   |
-                |   (GitPython)        |
-                +----------+-----------+
-                           |
-                           v
-                +----------------------+
-                |     Code Parser      |
-                |   (Python AST)       |
-                +----------+-----------+
-                           |
-                           v
-                +----------------------+
-                |  Feature Extraction  |
-                | LOC / Complexity     |
-                +----------+-----------+
-                           |
-                           v
-                +----------------------+
-                |   Bug Predictor      |
-                |  Risk Estimation     |
-                +----------+-----------+
-                           |
-                           v
-                +----------------------+
-                |  Code Review Engine  |
-                | Complexity / Issues  |
-                +----------+-----------+
-                           |
-                           v
-                +----------------------+
-                | Repository Health    |
-                |     Score            |
-                +----------+-----------+
-                           |
-                           v
-                +----------------------+
-                | Streamlit Dashboard  |
-                | Interactive Charts   |
-                +----------------------+
+---
 
 # Author
 
