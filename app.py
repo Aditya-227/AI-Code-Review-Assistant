@@ -76,13 +76,13 @@ with col2:
 
         repo_path = "temp_repo"
 
-if os.path.exists(repo_path):
-    import shutil
-    shutil.rmtree(repo_path)
+    if os.path.exists(repo_path):
+        import shutil
+        shutil.rmtree(repo_path)
 
-git.Repo.clone_from(repo_url, repo_path)
+        git.Repo.clone_from(repo_url, repo_path)
 
-repo = load_repository(repo_path)
+        repo = load_repository(repo_path)
 
         progress.progress(20)
 
@@ -229,5 +229,6 @@ repo = load_repository(repo_path)
 
         This AI system analyzed repository structure, commit history, code complexity and predicted potential bug risk using automated analysis techniques.
         """)
+
 
 
