@@ -190,7 +190,6 @@ streamlit run app.py
 
 ![Front4](screenshots/5.png)
 
-![Front5](screenshots/6.png)
 
 
 
