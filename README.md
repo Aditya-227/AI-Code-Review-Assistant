@@ -132,7 +132,7 @@ The system processes repositories through multiple stages:
 Clone the repository:
 
 
-git clone https://github.com/yourusername/AI-Code-Review-Assistant.git
+git clone https://github.com/Aditya-227/AI-Code-Review-Assistant.git
 
 
 Navigate into the project:
@@ -178,7 +178,7 @@ Top Risk Files
 
 
 
-screenshots/main.png
+screenshots/Main.png
 screenshots/2.png
 screenshots/3.png
 screenshots/4.png
